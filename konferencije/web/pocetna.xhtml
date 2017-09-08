@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./Template1.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui">
+
+
+<ui:define name="top">
+         <h:form>
+
+                    <div align="left">
+                        <p:outputLabel value="SVET KONFERENCIJA" style="font-size:30;" />
+                    </div>
+
+                    <div align="right" id="login">
+                        <h:panelGrid columns="4" >
+                            <p:outputLabel value="username" style="color: white"/>
+                            <p:outputLabel value="password" style="color: white"/>
+                            <p:outputLabel value="" style="color: white"/>
+                            <p:outputLabel value="" style="color: white"/>
+                            <p:inputText  size="20" value="${loginForma.username}"/>
+                            <p:password  size="20" value="${loginForma.password}"/>
+                            <p:commandButton type="submit" value="Log in" action="${loginForma.login()}" ajax="false"/>
+                            <p:commandButton type="submit" value="Register" action="${loginForma.startRegister()}" ajax="false"/>
+                        </h:panelGrid>    
+
+                    </div>
+
+                </h:form>
+    </ui:define>
+</ui:composition>

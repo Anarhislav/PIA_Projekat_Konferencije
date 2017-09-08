@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 7, 2017 7:01:24 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.Mesto" table="mesto" catalog="konferencije" optimistic-lock="version">
+        <id name="idmesto" type="java.lang.Integer">
+            <column name="idmesto" />
+            <generator class="identity" />
+        </id>
+        <property name="grad" type="string">
+            <column name="grad" length="32" not-null="true" />
+        </property>
+        <property name="drzava" type="string">
+            <column name="drzava" length="32" not-null="true" />
+        </property>
+        <property name="lokacija" type="string">
+            <column name="lokacija" length="32" not-null="true" />
+        </property>
+        <set name="konferencijas" table="konferencija" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="mesto" not-null="true" />
+            </key>
+            <one-to-many class="db.Konferencija" />
+        </set>
+        <set name="salas" table="sala" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="mesto" not-null="true" />
+            </key>
+            <one-to-many class="db.Sala" />
+        </set>
+    </class>
+</hibernate-mapping>

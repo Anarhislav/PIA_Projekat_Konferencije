@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 7, 2017 7:01:24 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.Komentar" table="komentar" catalog="konferencije" optimistic-lock="version">
+        <id name="idkomentar" type="java.lang.Integer">
+            <column name="idkomentar" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="korisnik" class="db.Korisnik" fetch="select">
+            <column name="korisnik" length="32" not-null="true" />
+        </many-to-one>
+        <many-to-one name="predavanje" class="db.Predavanje" fetch="select">
+            <column name="predavanje" not-null="true" />
+        </many-to-one>
+        <property name="komentar" type="string">
+            <column name="komentar" length="150" not-null="true" />
+        </property>
+        <property name="ocena" type="int">
+            <column name="ocena" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

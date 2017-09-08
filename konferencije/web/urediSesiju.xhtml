@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./Template2.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+    <ui:define name="top">
+         <h:form>
+
+            <div align="left">
+                <p:outputLabel value="SVET KONFERENCIJA" style="font-size:30;" />
+            </div>
+
+            <div align="right" >
+                <h:form>
+                    <h:panelGrid columns="4" >
+                        <p:commandButton value="moderator" action="${moderatorBean.moderator(loginForma.korisnik)}" ajax="false"/>
+                        <p:commandButton value="moje konferencije" action="${loginForma.mojeKonferencije()}" ajax="false"/>
+                        <p:commandButton value="moja agenda" action="${loginForma.mojaAgenda()}" ajax="false"/>
+                         <p:commandButton value="sanduce" icon="fa-weixin" action="${loginForma.mojePoruke()}" ajax="false"/>
+                         <p:commandButton value="logout" action="#{loginForma.logOut}"  ajax="false"/>
+                          <p:commandButton value="promeni sifru" action="#{loginForma.promeniSifru()}" ajax="false" />
+                           <p:commandButton  value="Home" action="${loginForma.goHome()}" ajax="false" />
+
+                    </h:panelGrid>    
+                </h:form>
+            </div>
+
+        </h:form>
+    </ui:define>
+
+    <ui:define name="content">
+       
+        <h:form enctype="multipart/form-data">
+            
+            <div align="center">
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+            <h:outputLabel value="sala"/>
+            <p:selectOneMenu value="${moderatorBean.sala}">
+                <f:selectItems value="${moderatorBean.sale}" var="sala"/>
+                <f:selectItem value="${sala}"/>
+ 
+            </p:selectOneMenu>
+            
+            <h:commandButton value="ok" action="${moderatorBean.staviSalu()}"/>
+            <br></br>
+        
+            
+             <p:fileUpload fileUploadListener="#{moderatorBean.handleFileUpload}" mode="advanced" dragDropSupport="false"
+                  multiple="true"  sizeLimit="1000000000" fileLimit="3" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+ 
+            
+            
+            <br></br><br></br><br></br>
+        <p:dataTable value="${moderatorBean.predavanja}" var="pred" >
+            
+            <p:column headerText="naslov">
+                <h:outputText value="#{pred.naslov}" />
+            </p:column>
+            
+            <p:column headerText="predavac">
+                <h:outputText value="#{pred.korisnikByAutor1.username}" />
+            </p:column>
+        
+            <p:column headerText="vrsta">
+                <h:outputText value="#{pred.tip}" />
+            </p:column>
+            
+            <p:column headerText="pocetak">
+                <p:calendar  value="#{pred.pocetak}" pattern="HH:mm" timeOnly="true"  />
+            </p:column>
+            
+            <p:column headerText="trajanje">
+                <h:outputText value="#{pred.trajanje}" />
+            </p:column>
+            
+            
+        </p:dataTable>
+       
+            
+            <br></br><br></br>
+            <h:panelGrid columns="2">
+                
+                <p:outputLabel  value="naslov:"/>
+                <p:inputText value="${moderatorBean.naslov}"/>
+                
+                
+                <p:outputLabel  value="predavac:"/>
+                <p:inputText value="${moderatorBean.predavac}"/>
+                
+                
+                <p:outputLabel for="console" value="Tip:" />
+                <p:selectOneMenu id="console" value="#{moderatorBean.tip}" style="width:125px">
+            <f:selectItem itemLabel="uvodno" itemValue="uvodno" />
+            <f:selectItem itemLabel="predavanje" itemValue="predavanje" />
+            <f:selectItem itemLabel="pauza" itemValue="pauza" />
+            <f:selectItem itemLabel="zavrsno" itemValue="zavrsno" />
+        </p:selectOneMenu>
+                
+                 <p:outputLabel  value="trajanje"/>
+                 <p:inputText value="${moderatorBean.trajanje}"/>
+                
+                
+                 <p:outputLabel for="time" value="Time:" />
+                 <p:calendar id="time" value="#{moderatorBean.pocetak}" pattern="HH:mm" timeOnly="true"  />
+                 
+                 
+                 <h:commandButton value="dodaj predavanje" action="${moderatorBean.dodajPredavanje()}"/>
+                 
+            </h:panelGrid>
+            
+            
+            
+             </div>
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

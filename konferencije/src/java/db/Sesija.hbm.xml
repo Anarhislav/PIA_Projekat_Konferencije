@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 7, 2017 7:01:24 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.Sesija" table="sesija" catalog="konferencije" optimistic-lock="version">
+        <id name="idsesija" type="java.lang.Integer">
+            <column name="idsesija" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="konferencija" class="db.Konferencija" fetch="select">
+            <column name="konferencija" not-null="true" />
+        </many-to-one>
+        <many-to-one name="sala" class="db.Sala" fetch="select">
+            <column name="sala" />
+        </many-to-one>
+        <property name="datum" type="date">
+            <column name="datum" length="10" />
+        </property>
+        <set name="galerijas" table="galerija" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="sesija" not-null="true" />
+            </key>
+            <one-to-many class="db.Galerija" />
+        </set>
+        <set name="predavanjes" table="predavanje" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="sesija" not-null="true" />
+            </key>
+            <one-to-many class="db.Predavanje" />
+        </set>
+        <set name="prijavaPredavanjes" table="prijava_predavanje" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="sesija" not-null="true" />
+            </key>
+            <one-to-many class="db.PrijavaPredavanje" />
+        </set>
+    </class>
+</hibernate-mapping>

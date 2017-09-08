@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 7, 2017 7:01:24 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.Konferencija" table="konferencija" catalog="konferencije" optimistic-lock="version">
+        <id name="idkonf" type="java.lang.Integer">
+            <column name="idkonf" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="korisnik" class="db.Korisnik" fetch="select">
+            <column name="moderator" length="32" not-null="true" />
+        </many-to-one>
+        <many-to-one name="mesto" class="db.Mesto" fetch="select">
+            <column name="mesto" not-null="true" />
+        </many-to-one>
+        <many-to-one name="oblast" class="db.Oblast" fetch="select">
+            <column name="oblast" not-null="true" />
+        </many-to-one>
+        <property name="naziv" type="string">
+            <column name="naziv" length="32" />
+        </property>
+        <property name="datumOd" type="date">
+            <column name="datumOd" length="10" />
+        </property>
+        <property name="datumDo" type="date">
+            <column name="datumDo" length="10" />
+        </property>
+        <property name="sifra" type="string">
+            <column name="sifra" length="61" not-null="true" />
+        </property>
+        <set name="prijavas" table="prijava" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="konferencija" not-null="true" />
+            </key>
+            <one-to-many class="db.Prijava" />
+        </set>
+        <set name="sesijas" table="sesija" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="konferencija" not-null="true" />
+            </key>
+            <one-to-many class="db.Sesija" />
+        </set>
+    </class>
+</hibernate-mapping>

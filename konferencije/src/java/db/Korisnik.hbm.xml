@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 7, 2017 7:01:24 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.Korisnik" table="korisnik" catalog="konferencije" optimistic-lock="version">
+        <id name="username" type="string">
+            <column name="username" length="32" />
+            <generator class="assigned" />
+        </id>
+        <property name="lozinka" type="string">
+            <column name="lozinka" length="32" not-null="true" />
+        </property>
+        <property name="ime" type="string">
+            <column name="ime" length="32" />
+        </property>
+        <property name="prezime" type="string">
+            <column name="prezime" length="32" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="32" />
+        </property>
+        <property name="institucija" type="string">
+            <column name="institucija" length="32" />
+        </property>
+        <property name="pol" type="string">
+            <column name="pol" length="32">
+                <comment>muski/zenski</comment>
+            </column>
+        </property>
+        <property name="slika" type="string">
+            <column name="slika" length="64" />
+        </property>
+        <property name="majca" type="string">
+            <column name="majca" length="10" />
+        </property>
+        <property name="linkedin" type="string">
+            <column name="linkedin" length="64" />
+        </property>
+        <property name="tip" type="string">
+            <column name="tip" length="32" not-null="true">
+                <comment>korisnik/moderator/admin</comment>
+            </column>
+        </property>
+        <set name="predavanjesForAutor3" table="predavanje" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="autor3" length="32" />
+            </key>
+            <one-to-many class="db.Predavanje" />
+        </set>
+        <set name="predavanjesForAutor4" table="predavanje" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="autor4" length="32" />
+            </key>
+            <one-to-many class="db.Predavanje" />
+        </set>
+        <set name="predavanjesForAutor1" table="predavanje" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="autor1" length="32" not-null="true" />
+            </key>
+            <one-to-many class="db.Predavanje" />
+        </set>
+        <set name="prijavas" table="prijava" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="korisnik" length="32" not-null="true" />
+            </key>
+            <one-to-many class="db.Prijava" />
+        </set>
+        <set name="predavanjesForAutor2" table="predavanje" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="autor2" length="32" />
+            </key>
+            <one-to-many class="db.Predavanje" />
+        </set>
+        <set name="porukasForPosiljalac" table="poruka" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="posiljalac" length="32" not-null="true" />
+            </key>
+            <one-to-many class="db.Poruka" />
+        </set>
+        <set name="porukasForPrimalac" table="poruka" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="primalac" length="32" not-null="true" />
+            </key>
+            <one-to-many class="db.Poruka" />
+        </set>
+        <set name="konferencijas" table="konferencija" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="moderator" length="32" not-null="true" />
+            </key>
+            <one-to-many class="db.Konferencija" />
+        </set>
+        <set name="prijavaPredavanjes" table="prijava_predavanje" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="username" length="32" not-null="true" />
+            </key>
+            <one-to-many class="db.PrijavaPredavanje" />
+        </set>
+        <set name="komentars" table="komentar" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="korisnik" length="32" not-null="true" />
+            </key>
+            <one-to-many class="db.Komentar" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="css/default.css"/>
+        <h:outputStylesheet name="css/cssLayout.css"/>
+        <title>Facelets Template</title>
+    </h:head>
+
+    <h:body>
+
+        <div id="top">
+           
+            <ui:insert name="top">
+               top
+
+            </ui:insert>
+        </div>
+        <div>
+            <div id="left">
+                <ui:insert name="left">
+                    <h:form>
+                        <br></br> <br></br> <br></br>
+                        <h:panelGrid columns="2">
+                           
+                            <p:outputLabel value="Naziv:" for="acSimple" />
+                            <p:autoComplete id="acSimple" value="#{filter.naziv}" completeMethod="#{filter.autoComplit}" />
+                           
+                             <p:outputLabel for="dateod" value="datum Od:" />
+                             <p:calendar id="dateod" value="#{filter.datumOd}" />
+                           
+                             <p:outputLabel for="datedo" value="datum Do:" />
+                             <p:calendar id="datedo" value="#{filter.datumDo}" />
+                        </h:panelGrid>   
+
+                        <br></br><br></br>
+                            
+                        <p:selectManyCheckbox id="grid" value="#{filter.izabraneOblasti}" layout="grid" columns="3" rendered="${loginForma.imaLiKorisnika()}">
+                            <f:selectItems value="#{filter.oblasti}" var="oblast" itemLabel="#{oblast.oblast}" itemValue="#{oblast.oblast}" />
+                        </p:selectManyCheckbox>
+                        <br></br>
+                        <p:commandButton value="trazi" action="${filter.filtriraj()}" update=":form:tabela" style="width: 100%" />
+                        <br></br>
+                        <p:commandButton value="sve konferencije" action="${filter.sveKonferencije()}" update=":form:tabela" style="width: 100%" />
+
+                    </h:form>
+                </ui:insert>
+            </div>
+            <div id="content" class="left_content">
+                <ui:insert name="content">
+                    <h:form id="form"> 
+                        <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                        <p:dataScroller id="tabela" value="#{filter.konferencije}" var="konf" chunkSize="10" mode="inline" scrollHeight="1000" >
+                            <f:facet name="header">
+                                konferencije
+                            </f:facet>
+
+                            <h:panelGrid columns="2" style="width:100%" border="2"  >
+                               
+                                
+                                <p:graphicImage name="slike/logos/#{filter.findLogo(konf)}.png" height="100" width="100" /> 
+                              
+                                <p:outputPanel>
+                                    <h:panelGrid columns="2" cellpadding="5" >
+                                        <h:outputText value="Naziv:" />
+                                        <h:outputText value="#{konf.naziv}" style="font-weight: bold"/>
+
+                                        <h:outputText value="Mesto:" />
+                                        <h:outputText value="#{konf.mesto.grad}" style="font-weight: bold"/>
+
+                                        <h:outputText value="Datum od" />
+                                        <h:outputText value="#{konf.datumOd}" style="font-weight: bold"/>
+                                        <h:outputText value="Datum do" />
+                                        <h:outputText value="#{konf.datumDo}" style="font-weight: bold"/>
+                                       
+                                        <p:commandButton  value="prijava"  action="#{loginForma.naPrijavu(konf)}" ajax="false"  rendered="${!loginForma.daLiJeAdmin}"/>
+                                        <p:commandButton  value="otkazi"  action="#{filter.otkazi(LoginForma.korisnik,konf)}" ajax="false" rendered="${loginForma.daLiJeAdmin}"/>
+                            
+                                    </h:panelGrid>
+                                </p:outputPanel>
+                            </h:panelGrid>
+                        </p:dataScroller>
+                    </h:form>
+
+                </ui:insert>
+            </div>
+        </div>
+        <div id="bottom">
+            <ui:insert name="bottom">autor Petar Drakulic ALL POINTS RESERVED</ui:insert>
+        </div>
+
+    </h:body>
+
+</html>

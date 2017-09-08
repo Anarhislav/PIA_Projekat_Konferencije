@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 7, 2017 7:01:24 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.Predavanje" table="predavanje" catalog="konferencije" optimistic-lock="version">
+        <id name="idpred" type="java.lang.Integer">
+            <column name="idpred" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="korisnikByAutor3" class="db.Korisnik" fetch="select">
+            <column name="autor3" length="32" />
+        </many-to-one>
+        <many-to-one name="korisnikByAutor4" class="db.Korisnik" fetch="select">
+            <column name="autor4" length="32" />
+        </many-to-one>
+        <many-to-one name="korisnikByAutor1" class="db.Korisnik" fetch="select">
+            <column name="autor1" length="32" not-null="true" />
+        </many-to-one>
+        <many-to-one name="korisnikByAutor2" class="db.Korisnik" fetch="select">
+            <column name="autor2" length="32" />
+        </many-to-one>
+        <many-to-one name="sesija" class="db.Sesija" fetch="select">
+            <column name="sesija" not-null="true" />
+        </many-to-one>
+        <property name="naslov" type="string">
+            <column name="naslov" length="64" not-null="true" />
+        </property>
+        <property name="trajanje" type="java.lang.Integer">
+            <column name="trajanje" />
+        </property>
+        <property name="tip" type="string">
+            <column name="tip" length="32" not-null="true">
+                <comment>uvodno/predavanje/pauza/zavrsno</comment>
+            </column>
+        </property>
+        <property name="pocetak" type="time">
+            <column name="pocetak" length="8" not-null="true" />
+        </property>
+        <set name="komentars" table="komentar" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="predavanje" not-null="true" />
+            </key>
+            <one-to-many class="db.Komentar" />
+        </set>
+    </class>
+</hibernate-mapping>

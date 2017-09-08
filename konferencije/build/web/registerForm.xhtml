@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./Template2.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml">
+
+    
+    
+    <ui:define name="top">
+         <h:form>
+
+                    <div align="left">
+                        <p:outputLabel value="SVET KONFERENCIJA" style="font-size:30;" />
+                    </div>
+
+                    <div align="right" id="login">
+                        <h:panelGrid columns="4" >
+                            <p:outputLabel value="username" style="color: white"/>
+                            <p:outputLabel value="password" style="color: white"/>
+                            <p:outputLabel value="" style="color: white"/>
+                            <p:outputLabel value="" style="color: white"/>
+                            <p:inputText  size="20" value="${loginForma.username}"/>
+                            <p:password  size="20" value="${loginForma.password}"/>
+                            <p:commandButton type="submit" value="Log in" action="${loginForma.login()}" ajax="false"/>
+                            <p:commandButton type="submit" value="Register" action="${loginForma.startRegister()}" ajax="false"/>
+                        </h:panelGrid>    
+
+                    </div>
+
+                </h:form>
+    </ui:define>
+    
+    
+    
+    <ui:define name="content">
+        
+        <br></br> <br></br> <br></br>
+        <h:form enctype="multipart/form-data">
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+            <div align="center">
+                <h:panelGrid columns="2">
+                    
+                <p:outputLabel value="ime:"/>
+                <p:inputText value="${registerBean.ime}" rendered="true"/>
+                             
+                <p:outputLabel value="prezime:"/>
+                <p:inputText value="${registerBean.prezime}" rendered="true" />
+                             
+                <p:outputLabel value="username:"/>
+                <p:inputText value="${registerBean.username}" rendered="true"/>
+                 
+                <p:outputLabel value="password:"/>
+                <p:password id="password" value="${registerBean.password1}" rendered="true">
+                    <f:validateLength minimum="8" maximum="11" /> 
+                    
+                </p:password>
+                
+                <p:outputLabel value="ponovi password:"/>
+                <p:password value="${registerBean.password2}" rendered="true"/>
+                
+                
+                <p:outputLabel value="institucija:"/>
+                <p:inputText value="${registerBean.institucija}" rendered="true"/>
+                             
+                 <p:outputLabel value="email:"/>
+                <p:inputText value="${registerBean.email}" />
+                 
+                 <p:outputLabel value="linkedin profil:"/>
+                 <p:inputText value="${registerBean.linkedin}"   />    
+                 
+                 
+              <p:outputLabel value="okaci profilnu"/>
+              <p:fileUpload value="#{registerBean.file}" mode="simple" />
+ 
+                
+                 
+                
+                 
+        <p:outputLabel for="console" value="pol:" />
+        <p:selectOneRadio id="console" value="#{registerBean.pol}">
+            <f:selectItem itemLabel="muski" itemValue="muski" />
+            <f:selectItem itemLabel="zenski" itemValue="zenski" />
+        </p:selectOneRadio>
+                 
+          <p:outputLabel for="bla" value="velicina majce:" />
+          <p:selectOneRadio id="bla" value="#{registerBean.majica}">
+            <f:selectItem itemLabel="M" itemValue="M" />
+            <f:selectItem itemLabel="L" itemValue="L" />
+            <f:selectItem itemLabel="X" itemValue="X" />
+            <f:selectItem itemLabel="XL" itemValue="XL" />
+            <f:selectItem itemLabel="XXL" itemValue="XXL" />
+        </p:selectOneRadio>       
+                 
+        <p:commandButton value="register" action="${registerBean.registerUser()}" ajax="false"/>
+                 
+                 
+                 
+                </h:panelGrid>
+            </div> 
+        </h:form>
+    </ui:define>
+
+</ui:composition>

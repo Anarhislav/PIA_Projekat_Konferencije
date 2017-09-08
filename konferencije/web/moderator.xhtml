@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./Template1.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="top">
+         <h:form>
+
+            <div align="left">
+                <p:outputLabel value="SVET KONFERENCIJA" style="font-size:30;" />
+            </div>
+
+            <div align="right" >
+                <h:form>
+                    <h:panelGrid columns="4" >
+                        <p:commandButton value="moderator" action="${moderatorBean.moderator(loginForma.korisnik)}" ajax="false"/>
+                        <p:commandButton value="moje konferencije" action="${loginForma.mojeKonferencije()}" ajax="false"/>
+                        <p:commandButton value="moja agenda" action="${loginForma.mojaAgenda()}" ajax="false"/>
+                         <p:commandButton value="sanduce" icon="fa-weixin" action="${loginForma.mojePoruke()}" ajax="false"/>
+                         <p:commandButton value="logout" action="#{loginForma.logOut}"  ajax="false"/>
+                          <p:commandButton value="promeni sifru" action="#{loginForma.promeniSifru()}" ajax="false" />
+                           <p:commandButton  value="Home" action="${loginForma.goHome()}" ajax="false" />
+
+                    </h:panelGrid>    
+                </h:form>
+            </div>
+
+        </h:form>
+    </ui:define>
+
+    <ui:define name="left">
+        
+         <h:form id="form"> 
+             <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+             <p:dataScroller id="tabela" value="#{moderatorBean.konferencije}" var="konf" chunkSize="10" mode="inline" scrollHeight="500" >
+                
+                            <f:facet name="header">
+                                konferencije
+                            </f:facet>
+                <p:outputPanel>
+                    <h:panelGrid columns="3" cellpadding="5" >
+                        
+                  
+                <h:outputLabel value="naziv:"/>
+                <h:outputLabel value="${konf.naziv}"/>
+                <p:commandButton value="detalji" action="${moderatorBean.findSesija(konf)}" update=":form1:table"/>         
+              
+                     </h:panelGrid>            
+                 </p:outputPanel>   
+                    
+               </p:dataScroller>
+            </h:form>
+        
+        
+    </ui:define>
+
+    <ui:define name="content">
+        
+        
+         <h:form id="form1">
+            
+           
+            
+          
+             
+             <p:dataTable id="table" value="${moderatorBean.sesije}" var="sesija" >
+                       
+                        
+                    <p:column headerText="datum">
+                     
+                     <h:outputText value="#{sesija.datum}">
+                  <f:convertDateTime pattern="MM-dd-yyyy" />
+        </h:outputText>
+                 </p:column>  
+                   
+                      
+                   
+                   <p:column headerText="uredi">
+                     
+                       <h:commandButton  value="uredi" action="${moderatorBean.uredi(sesija)}"/>
+                    
+                </p:column>  
+                   
+                   
+                   <br></br><br></br><br></br><br></br>
+                   </p:dataTable>
+            
+            
+        </h:form>
+        
+    </ui:define>
+
+</ui:composition>

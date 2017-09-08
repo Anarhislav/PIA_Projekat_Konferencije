@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jul 7, 2017 7:01:24 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="db.Prijava" table="prijava" catalog="konferencije" optimistic-lock="version">
+        <id name="idPrijava" type="java.lang.Integer">
+            <column name="idPrijava" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="konferencija" class="db.Konferencija" fetch="select">
+            <column name="konferencija" not-null="true" />
+        </many-to-one>
+        <many-to-one name="korisnik" class="db.Korisnik" fetch="select">
+            <column name="korisnik" length="32" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,100 @@
+
+#top {
+    position: relative;
+    background-color: tomato;
+    color: white;
+    padding: 5px;
+    margin: 0px 0px 10px 0px;
+    height: 13%;
+}
+
+#topAdmin {
+    position: relative;
+    background-color: brown;
+    color: white;
+    padding: 5px;
+    margin: 0px 0px 10px 0px;
+    height: 13%;
+}
+
+#bottom {
+   position:fixed;
+height: 2%;
+   bottom:0;
+   width:100%;
+    
+    position: relative;
+    background-color: #c2dfef;
+    padding: 5px;
+    margin: 10px 0px 0px 0px;
+   
+}
+
+#left {
+   resize:both;
+    overflow:auto; 
+    float: left;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 300px;
+    height: 88%;
+}
+
+#right {
+    resize:both;
+    overflow:auto; 
+    display: flex;
+  flex-direction: column;
+    float: right;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+    height: 88%;
+}
+
+.center_content {
+    resize:both;
+    overflow:auto; 
+    display: flex;
+  flex-direction: column;
+    position: relative;
+    background-color: #dddddd;
+    padding: 5px;
+    height: 88%;
+}
+
+.left_content {
+    resize:both;
+    overflow:auto; 
+    display: flex;
+  flex-direction: column;
+    background-color: #dddddd;
+    padding: 5px;
+    margin-left: 320px;
+    height: 88%;
+}
+
+.right_content {
+    resize:both;
+    overflow:auto; 
+    display: flex;
+  flex-direction: column;
+    background-color: #dddddd;
+    padding: 5px;
+    margin: 0px 170px 0px 170px;
+    height: 88%;
+}
+
+#top a:link, #top a:visited {
+  color: white;
+  font-weight : bold;
+  text-decoration: none;
+}
+
+#top a:link:hover, #top a:visited:hover  {
+  color: black;
+  font-weight : bold;
+  text-decoration : underline;
+}
+
+

@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="css/default.css"/>
+        <h:outputStylesheet name="css/cssLayout.css"/>
+        <title>Facelets Template</title>
+    </h:head>
+
+    <h:body>
+
+        <div id="top">
+            <ui:insert name="top">
+               
+                <h:form>
+
+            <div align="left">
+                <p:outputLabel value="SVET KONFERENCIJA" style="font-size:30;" />
+            </div>
+
+            <div align="right" >
+                <h:form>
+                    <h:panelGrid columns="4" >
+                        <p:commandButton value="moje konferencije" action="${loginForma.mojeKonferencije()}" ajax="false"/>
+                                                <p:commandButton value="moja agenda" action="${loginForma.mojaAgenda()}" ajax="false"/>
+
+                        <p:commandButton value="sanduce" icon="fa-weixin" action="${loginForma.mojePoruke()}" ajax="false"/>
+                         <p:commandButton value="logout" action="#{loginForma.logOut}"  ajax="false"/>
+                          <p:commandButton value="promeni sifru" action="#{loginForma.promeniSifru()}" ajax="false" />
+                           <p:commandButton  value="Home" action="${loginForma.goHome()}" ajax="false" />
+                        
+
+                    </h:panelGrid>    
+                </h:form>
+            </div>
+
+        </h:form>
+                
+            </ui:insert>
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+
+        <div id="bottom">
+            <ui:insert name="bottom">Bottom</ui:insert>
+        </div>
+
+    </h:body>
+
+</html>
